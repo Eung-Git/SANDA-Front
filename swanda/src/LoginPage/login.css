@@ -131,3 +131,15 @@ button {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
