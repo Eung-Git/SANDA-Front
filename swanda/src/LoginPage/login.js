@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./login.css"; // 스타일을 별도의 CSS 파일에서 관리한다고 가정
+import "./login.css";
 
 function LoginPage({ onLogin }) {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -7,7 +7,7 @@ function LoginPage({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
     nickname: "",
-    schoolEmail: "",
+    email: "",
     password: "",
     confirmPassword: "",
     major: "",
@@ -17,6 +17,7 @@ function LoginPage({ onLogin }) {
   });
 
   const [passwordError, setPasswordError] = useState("");
+  const [passwordSuccess, setPasswordSuccess] = useState("");
   const [nicknameError, setNicknameError] = useState("");
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -45,15 +46,31 @@ function LoginPage({ onLogin }) {
     });
 
     if (name === "confirmPassword" || name === "password") {
-      if (
-        formData.password === value ||
-        (name === "confirmPassword" && formData.password === formData.confirmPassword)
-      ) {
+      if (formData.password === value || (name === "confirmPassword" && formData.password === formData.confirmPassword)) {
         setPasswordError("");
+        setPasswordSuccess("비밀번호가 일치합니다.");
       } else {
         setPasswordError("비밀번호가 일치하지 않습니다.");
+        setPasswordSuccess("");
       }
     }
+  };
+
+  const resetFormData = () => {
+    setFormData({
+      username: "",
+      nickname: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      major: "",
+      phonePart1: "",
+      phonePart2: "",
+      phonePart3: "",
+    });
+    setPasswordError("");
+    setPasswordSuccess("");
+    setNicknameError("");
   };
 
   const handleFormSubmit = (e) => {
@@ -61,8 +78,8 @@ function LoginPage({ onLogin }) {
 
     if (isSignUp) {
       const emailRegex = /^[^@\s]+@kookmin\.ac\.kr$/;
-      if (!emailRegex.test(formData.schoolEmail)) {
-        alert("학교 이메일은 '@kookmin.ac.kr' 형식으로 입력해주세요.");
+      if (!emailRegex.test(formData.email)) {
+        alert("학교 이메일을 입력해주세요. ex) kookmin@kookmin.ac.kr");
         return;
       }
 
@@ -73,18 +90,21 @@ function LoginPage({ onLogin }) {
 
       alert(`${formData.username}님, 회원가입이 완료되었습니다.`);
       setIsSignUp(false);
+      resetFormData();
     } else if (isForgotPassword) {
       if (!isCodeSent) {
         setIsCodeSent(true);
         setTimeLeft(300);
-        alert(`인증번호가 ${formData.schoolEmail}로 전송되었습니다.`);
+        alert(`인증번호가 ${formData.email}로 전송되었습니다.`);
       } else {
         alert("비밀번호 찾기가 완료되었습니다. 새로운 비밀번호로 로그인하세요.");
         setIsForgotPassword(false);
+        resetFormData();
       }
     } else {
-      alert(`${formData.schoolEmail}님, 로그인되었습니다.`);
+      alert(`${formData.email}님, 로그인되었습니다.`);
       onLogin();
+      resetFormData();
     }
   };
 
@@ -147,12 +167,12 @@ function LoginPage({ onLogin }) {
         )}
         {(isSignUp || isForgotPassword || !isSignUp) && (
           <div className="form-group">
-            <label htmlFor="schoolEmail">학교 이메일 (아이디)</label>
+            <label htmlFor="email">학교 이메일 (아이디)</label>
             <input
               type="email"
-              id="schoolEmail"
-              name="schoolEmail"
-              value={formData.schoolEmail}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleInputChange}
               required
             />
@@ -183,7 +203,8 @@ function LoginPage({ onLogin }) {
                 onChange={handleInputChange}
                 required
               />
-              {passwordError && <p className="error-message" style={{ color: "red" }}>{passwordError}</p>}
+              {passwordError && <p className="error-message">{passwordError}</p>}
+              {passwordSuccess && <p className="success-message">{passwordSuccess}</p>}
             </div>
             <div className="form-group">
               <label htmlFor="major">전공</label>
@@ -254,7 +275,10 @@ function LoginPage({ onLogin }) {
         {!isForgotPassword && (
           <button
             className="toggle-button"
-            onClick={() => setIsSignUp(!isSignUp)}
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              resetFormData();
+            }}
             style={{ flex: "1", maxWidth: "200px" }}
           >
             {isSignUp ? "이미 계정이 있으신가요? 로그인" : "계정이 없으신가요? 회원가입"}
@@ -263,7 +287,10 @@ function LoginPage({ onLogin }) {
         {!isSignUp && !isForgotPassword && (
           <button
             className="toggle-button"
-            onClick={() => setIsForgotPassword(true)}
+            onClick={() => {
+              setIsForgotPassword(true);
+              resetFormData();
+            }}
             style={{ flex: "1", maxWidth: "200px" }}
           >
             비밀번호 찾기
@@ -277,6 +304,7 @@ function LoginPage({ onLogin }) {
             setIsForgotPassword(false);
             setIsCodeSent(false);
             setTimeLeft(0);
+            resetFormData();
           }}
         >
           로그인으로 돌아가기
