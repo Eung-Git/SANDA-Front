@@ -9,7 +9,7 @@ const Main = () => {
 
     const handleSubmit_question = (event) => {
         event.preventDefault();
-        if (question.trim() === "" || title.trim() === "") {
+        if (question.trim() === "" || title.trim() === "") {  // 띄어쓰기만 입력했을 때
             alert("제목과 질문을 모두 입력해주세요.");
             return;
         }
@@ -30,7 +30,7 @@ const Main = () => {
     };
 
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]); // 첫 번째 선택된 파일 설정
+        setFile(event.target.files[0]); // 첫 번째 선택된 파일 설정 // 파일이 여러개일 경우
     };
 
     return (
