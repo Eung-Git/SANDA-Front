@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./MainPage/sidebar";
 import Main from "./MainPage/main";
 import Header from "./Header/header";
+import Login from "./LoginPage/login";
 import "./App.css";
 
 function App() {
@@ -27,19 +28,6 @@ function App() {
             <div className="container">
                 <Header isLoggedIn={isLoggedIn} nickname={nickname} onLogout={handleLogout} />
 
-                {/* 로그인 테스트 버튼 */}
-                <div style={{ marginTop: "50px", textAlign: "center" }}>
-                    {!isLoggedIn ? (
-                        <button onClick={() => handleLogin("TestUser")} style={styles.button}>
-                            Test Login
-                        </button>
-                    ) : (
-                        <button onClick={handleLogout} style={styles.button}>
-                            Test Logout
-                        </button>
-                    )}
-                </div>
-
                 <Routes>
                     <Route path="/" element={
                         <div className="content">
@@ -47,6 +35,7 @@ function App() {
                             <Main />
                         </div>
                     } />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </div>
         </Router>

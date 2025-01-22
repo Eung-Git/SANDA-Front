@@ -1,13 +1,16 @@
 /* 공통 스타일 */
-body {
+.body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    padding-top: 90px;
+    padding-bottom: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 200vh;
+    width: 100%;
 }
   
 .login-page {
@@ -22,7 +25,8 @@ body {
   
 h1 {
     font-size: 24px;
-    margin-bottom: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 15px;
     color: #333;
 }
   
@@ -110,27 +114,7 @@ button {
     }
 }
   
-/* 전화번호 입력란 스타일 */
-.phone-input {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.phone-input input {
-    width: 30%;
-    padding: 0.5rem;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.phone-input input:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+/* 확인/경고 메시지 */
 .error-message {
     color: red;
     font-size: 12px;
