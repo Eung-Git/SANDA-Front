@@ -1,21 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from 'axios';
 
 const Main = () => {
     const [question, setQuestion] = useState("");
     const [title, setTitle] = useState("");
     const [file, setFile] = useState(null); // 첨부 파일 상태
     const fileInputRef = useRef(null);
-
-    useEffect(() => {
-        axios.post(`${process.env.REACT_APP_ADDRESS}/post/create/`,
-            {
-                title: title,
-                content: question,
-                file: file,
-            },
-        );
-    });
 
     const handleSubmit_question = (event) => {
         event.preventDefault();

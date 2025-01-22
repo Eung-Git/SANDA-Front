@@ -20,6 +20,7 @@ function LoginPage({ onLogin }) {
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState("");
   const [nicknameError, setNicknameError] = useState("");
+  const [nicknameSuccess, setNicknameSuccess] = useState("");
   const [emailSuccess, setEmailSuccess] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -146,10 +147,10 @@ function LoginPage({ onLogin }) {
   const handleNicknameCheck = () => {
     if (formData.nickname.trim() === "") {
       setNicknameError("닉네임을 입력해주세요.");
-      setPasswordSuccess("");
+      setNicknameSuccess(""); 
     } else {
       setNicknameError("");
-      setPasswordSuccess("사용 가능한 닉네임입니다!");
+      setNicknameSuccess("사용 가능한 닉네임입니다!");
     }
   };
 
@@ -158,7 +159,7 @@ function LoginPage({ onLogin }) {
       setEmailError("이메일을 입력해주세요.");
       setEmailSuccess("");
     } else if (!/^[^@\s]+@kookmin\.ac\.kr$/.test(formData.email)) {
-      setEmailError("학교 이메일을 입력해주세요. ex) kookmin@kookmin.ac.kr");
+      setEmailError("올바른 형식의 학교 이메일을 입력해주세요.");
       setEmailSuccess("");
     } else {
       setEmailError("");
@@ -223,10 +224,11 @@ function LoginPage({ onLogin }) {
                   {nicknameError}
                 </p>
               )}
-              {passwordSuccess && (
+              {nicknameSuccess && (
                 <p className="success-message" style={{ color: "green" }}>
-                  {passwordSuccess}
+                  {nicknameSuccess}
                 </p>
+              
               )}
             </div>
             <div className="form-group">
