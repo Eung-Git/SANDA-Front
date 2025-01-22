@@ -159,7 +159,7 @@ function LoginPage({ onLogin }) {
       setEmailError("이메일을 입력해주세요.");
       setEmailSuccess("");
     } else if (!/^[^@\s]+@kookmin\.ac\.kr$/.test(formData.email)) {
-      setEmailError("올바른 형식의 학교 이메일을 입력해주세요.");
+      setEmailError("학교 이메일을 입력해주세요. ex) kookmin@kookmin.ac.kr");
       setEmailSuccess("");
     } else {
       setEmailError("");
