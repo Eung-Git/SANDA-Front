@@ -55,15 +55,22 @@ function App() {
 
 // 간단한 버튼 스타일
 const styles = {
-    button: {
-        padding: "10px 20px",
-        fontSize: "16px",
-        backgroundColor: "#007bff",
-        color: "#fff",
-        border: "none",
-        borderRadius: "4px",
-        cursor: "pointer",
-    },
+  container: {
+    display: "flex",
+    height: "100vh",
+    fontFamily: "'Arial', sans-serif",
+    flexDirection: "column",
+  },
+  logoutButton: {
+    alignSelf: "flex-end",
+    margin: "10px",
+    padding: "10px",
+    fontSize: "14px",
+    backgroundColor: "#FF4136",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+  },
 };
 
 export default App;
