@@ -1,0 +1,31 @@
+.mypage-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mypage-content {
+    flex: 1;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  
+  .mypage-content h2 {
+    text-align: center;
+  }
+  
+  .mypage-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .mypage-content li {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+  }
+  

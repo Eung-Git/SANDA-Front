@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import { FaRegFileImage } from "react-icons/fa"; // .jpg, .jpeg, .img, .png
 import { FaRegFilePdf } from "react-icons/fa"; // .pdf
 import { FaRegFileCode } from "react-icons/fa"; // .py, .java, .cpp
@@ -56,13 +57,20 @@ const Main = () => {
     };
 
     // 폼 제출 핸들러
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (title.trim() === "" || question.trim() === "") {
             alert("제목과 질문을 모두 입력해주세요.");
             return;
         }
+
+        const response = await axios.post(`${process.env.REACT_APP_ADDRESS}/post/question_create/`,
+            {
+                "title": "테스트",
+                "content": "테스트"
+            },
+        );
 
         console.log("제목:", title);
         console.log("질문:", question);
